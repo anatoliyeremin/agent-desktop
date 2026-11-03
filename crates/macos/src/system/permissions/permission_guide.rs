@@ -308,7 +308,8 @@ mod tests {
     fn the_host_walk_passes_through_a_process_of_another_user() {
         let parent = parent_pid(i32::try_from(std::process::id()).unwrap());
         assert_eq!(parent, Some(unsafe { libc::getppid() }));
-        let launchd_child = std::process::Command::new("/bin/ps")
+        let ps = std::env::var_os("AGENT_DESKTOP_TEST_PS").unwrap_or_else(|| "/bin/ps".into());
+        let launchd_child = std::process::Command::new(ps)
             .args(["-axo", "pid=,ppid=,uid="])
             .output()
             .unwrap();

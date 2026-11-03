@@ -55,6 +55,10 @@ jobs:
           set -euo pipefail
           PROFILE='(version 1)(allow default)(deny network*)'
           TEST_PROFILE='(version 1)(allow default)(deny network-outbound (remote ip "*:*"))(allow network-outbound (remote ip "localhost:*"))'
+          cp /bin/ps "$RUNNER_TEMP/ps-for-tests"
+          chmod 0755 "$RUNNER_TEMP/ps-for-tests"
+          cmp /bin/ps "$RUNNER_TEMP/ps-for-tests"
+          export AGENT_DESKTOP_TEST_PS="$RUNNER_TEMP/ps-for-tests"
           /usr/bin/sandbox-exec -p "$PROFILE" cargo +1.91.0 build --release --locked --offline --target aarch64-apple-darwin -p agent-desktop -p agent-desktop-macos --bins
           env -u AGENT_DESKTOP_HOME /usr/bin/sandbox-exec -p "$TEST_PROFILE" cargo +1.91.0 test --locked --offline -p agent-desktop-core -p agent-desktop-macos --lib > dist/library-tests.txt 2>&1 || { tail -n 120 dist/library-tests.txt; exit 1; }
           tail -n 8 dist/library-tests.txt
