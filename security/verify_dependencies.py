@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import tarfile
 import tomllib
 
 policy = json.loads(Path('security/review-policy.json').read_text())
@@ -51,11 +52,19 @@ for (name, version), record in sorted(expected.items()):
     archive = cache / f'{name}-{version}.crate'
     assert hashlib.sha256(archive.read_bytes()).hexdigest() == record['checksum']
     source = sources / f'{name}-{version}'
-    checksums = json.loads((source / '.cargo-checksum.json').read_text())
-    for relative, digest in checksums['files'].items():
-        file = source / relative
-        assert file.resolve().is_relative_to(source.resolve())
-        assert hashlib.sha256(file.read_bytes()).hexdigest() == digest, (name, relative)
+    archived_files = set()
+    with tarfile.open(archive, 'r:gz') as crate:
+        for member in crate.getmembers():
+            if member.isdir():
+                continue
+            assert member.isfile(), (name, member.name, 'non-regular archive entry')
+            relative = Path(member.name).relative_to(f'{name}-{version}')
+            file = source / relative
+            assert file.resolve().is_relative_to(source.resolve())
+            assert file.read_bytes() == crate.extractfile(member).read(), (name, str(relative))
+            archived_files.add(str(relative))
+    extra = {str(p.relative_to(source)) for p in source.rglob('*') if p.is_file()} - archived_files
+    assert extra <= {'.cargo-ok', '.cargo-checksum.json'}, (name, 'unexpected extracted files', extra)
     manifest = tomllib.loads((source / 'Cargo.toml').read_text())
     build = manifest['package'].get('build')
     if build or (source / 'build.rs').exists():
