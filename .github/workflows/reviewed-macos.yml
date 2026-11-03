@@ -18,9 +18,6 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 35
     env:
-      CARGO_HOME: ${{ runner.temp }}/reviewed-cargo
-      CARGO_TARGET_DIR: ${{ runner.temp }}/reviewed-target
-      AGENT_DESKTOP_HOME: ${{ runner.temp }}/reviewed-state
       RUSTUP_TOOLCHAIN: 1.91.0
       MACOSX_DEPLOYMENT_TARGET: '13.0'
       npm_config_ignore_scripts: 'true'
@@ -33,6 +30,10 @@ jobs:
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
+      - name: Isolate build and runtime directories
+        shell: bash
+        run: |
+          printf 'CARGO_HOME=%s/reviewed-cargo\nCARGO_TARGET_DIR=%s/reviewed-target\nAGENT_DESKTOP_HOME=%s/reviewed-state\n' "$RUNNER_TEMP" "$RUNNER_TEMP" "$RUNNER_TEMP" >> "$GITHUB_ENV"
       - name: Prepare fixed compiler on the disposable cloud runner
         shell: bash
         run: |
