@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 35
     env:
       RUSTUP_TOOLCHAIN: 1.91.0
-      MACOSX_DEPLOYMENT_TARGET: '13.0'
+      MACOSX_DEPLOYMENT_TARGET: '10.15'
       npm_config_ignore_scripts: 'true'
       npm_config_save_exact: 'true'
       npm_config_min_release_age: '7'
