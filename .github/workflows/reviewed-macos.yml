@@ -15,7 +15,7 @@ concurrency:
 jobs:
   build:
     if: github.repository == 'anatoliyeremin/agent-desktop'
-    runs-on: macos-15
+    runs-on: macos-15-intel
     timeout-minutes: 35
     env:
       RUSTUP_TOOLCHAIN: 1.91.0
@@ -38,10 +38,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(uname -m)" = arm64
+          test "$(uname -m)" = x86_64
           mkdir -p "$CARGO_HOME" "$CARGO_TARGET_DIR" "$AGENT_DESKTOP_HOME"
           chmod 700 "$CARGO_HOME" "$AGENT_DESKTOP_HOME"
           rustup toolchain install 1.91.0 --profile minimal --no-self-update
+          rustup target add aarch64-apple-darwin --toolchain 1.91.0
           rustc +1.91.0 --version
           cargo +1.91.0 --version
       - name: Download locked source packages without executing build scripts
@@ -54,17 +55,22 @@ jobs:
           set -euo pipefail
           PROFILE='(version 1)(allow default)(deny network*)'
           TEST_PROFILE='(version 1)(allow default)(deny network-outbound (remote ip "*:*"))(allow network-outbound (remote ip "localhost:*"))'
-          /usr/bin/sandbox-exec -p "$PROFILE" cargo +1.91.0 build --release --locked --offline -p agent-desktop -p agent-desktop-macos --bins
-          /usr/bin/sandbox-exec -p "$TEST_PROFILE" cargo +1.91.0 test --locked --offline -p agent-desktop-core -p agent-desktop-macos --lib > dist/library-tests.txt 2>&1
-          /usr/bin/sandbox-exec -p "$PROFILE" "$CARGO_TARGET_DIR/release/agent-desktop" version > dist/version.json
-          /usr/bin/sandbox-exec -p "$PROFILE" "$CARGO_TARGET_DIR/release/agent-desktop" --help > dist/help.txt
+          /usr/bin/sandbox-exec -p "$PROFILE" cargo +1.91.0 build --release --locked --offline --target aarch64-apple-darwin -p agent-desktop -p agent-desktop-macos --bins
+          /usr/bin/sandbox-exec -p "$TEST_PROFILE" cargo +1.91.0 test --locked --offline -p agent-desktop-core -p agent-desktop-macos --lib > dist/library-tests.txt 2>&1 || { tail -n 120 dist/library-tests.txt; exit 1; }
+          tail -n 8 dist/library-tests.txt
+          /usr/bin/sandbox-exec -p "$PROFILE" cargo +1.91.0 build --locked --offline -p agent-desktop
+          /usr/bin/sandbox-exec -p "$PROFILE" "$CARGO_TARGET_DIR/debug/agent-desktop" version > dist/version.json
+          /usr/bin/sandbox-exec -p "$PROFILE" "$CARGO_TARGET_DIR/debug/agent-desktop" --help > dist/help.txt
       - name: Package only the locally built CLI and helper
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p package
-          cp "$CARGO_TARGET_DIR/release/agent-desktop" package/
-          cp "$CARGO_TARGET_DIR/release/agent-desktop-macos-helper" package/
+          cp "$CARGO_TARGET_DIR/aarch64-apple-darwin/release/agent-desktop" package/
+          cp "$CARGO_TARGET_DIR/aarch64-apple-darwin/release/agent-desktop-macos-helper" package/
+          file package/*
+          test "$(lipo -archs package/agent-desktop)" = arm64
+          test "$(lipo -archs package/agent-desktop-macos-helper)" = arm64
           codesign --verify --strict package/agent-desktop
           codesign --verify --strict package/agent-desktop-macos-helper
           python3 - <<'PY'
@@ -73,6 +79,7 @@ jobs:
           assert version['ok'] and version['data']['version']=='1.1.0'
           p=pathlib.Path('package')
           manifest={'repository': os.environ['GITHUB_REPOSITORY'], 'commit': os.environ['GITHUB_SHA'], 'run_id': os.environ['GITHUB_RUN_ID'], 'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'upstream_commit': 'd3dc190afbf34cd2377252398ddd5c30efbd093a', 'compiler': subprocess.check_output(['rustc', '+1.91.0', '--version'],text=True).strip(), 'built_from_source': True, 'target': 'aarch64-apple-darwin', 'binaries': {f.name: hashlib.sha256(f.read_bytes()).hexdigest() for f in p.iterdir()}}
+          manifest['cloud_test_target']='x86_64-apple-darwin'
           pathlib.Path('dist/build-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
           PY
           tar -czf dist/agent-desktop-reviewed-aarch64-apple-darwin.tar.gz -C package agent-desktop agent-desktop-macos-helper

@@ -18,6 +18,14 @@ expected = {(p['name'], p['version']): p for p in policy['active_crates']}
 actual = set(re.findall(r'([\w-]+) v([0-9][\w.+-]*)', tree))
 actual = {p for p in actual if not p[0].startswith('agent-desktop')}
 assert actual == set(expected), (actual - set(expected), set(expected) - actual)
+host_tree = subprocess.check_output([
+    'cargo', '+1.91.0', 'tree', '--locked', '--offline',
+    '--target', 'x86_64-apple-darwin', '-p', 'agent-desktop',
+    '-p', 'agent-desktop-macos', '--edges', 'normal,build',
+], text=True)
+host_crates = set(re.findall(r'([\w-]+) v([0-9][\w.+-]*)', host_tree))
+host_crates = {p for p in host_crates if not p[0].startswith('agent-desktop')}
+assert host_crates == set(expected), 'unreviewed Intel-host dependency graph'
 registry = Path(os.environ['CARGO_HOME']) / 'registry'
 index = next((registry / 'index').glob('*/.cache'))
 sources = next((registry / 'src').glob('*'))
