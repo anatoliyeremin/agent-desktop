@@ -13,11 +13,11 @@ thiserror.workspace          = true
 tracing.workspace            = true
 
 [target.'cfg(target_os = "windows")'.dependencies]
-uiautomation = { version = "0.25", default-features = false, features = [
+uiautomation = { version = "=0.25.0", default-features = false, features = [
   "control",
   "input",
 ] }
-windows = { version = "0.62.2", features = [
+windows = { version = "=0.62.2", features = [
   "Foundation",
   "Graphics_Capture",
   "Graphics_DirectX_Direct3D11",
@@ -32,7 +32,7 @@ windows = { version = "0.62.2", features = [
   "Win32_System_WinRT_Graphics_Capture",
   "Win32_UI_Accessibility",
 ] }
-windows-sys = { version = "0.61", features = [
+windows-sys = { version = "=0.61.2", features = [
   "Win32_Foundation",
   "Win32_System_Com",
   "Win32_UI_HiDpi",

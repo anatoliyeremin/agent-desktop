@@ -1,0 +1,84 @@
+name: Reviewed macOS source build
+
+on:
+  push:
+    branches: [security-review]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reviewed-macos-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.repository == 'anatoliyeremin/agent-desktop'
+    runs-on: macos-15
+    timeout-minutes: 35
+    env:
+      CARGO_HOME: ${{ runner.temp }}/reviewed-cargo
+      CARGO_TARGET_DIR: ${{ runner.temp }}/reviewed-target
+      AGENT_DESKTOP_HOME: ${{ runner.temp }}/reviewed-state
+      RUSTUP_TOOLCHAIN: 1.91.0
+      MACOSX_DEPLOYMENT_TARGET: '13.0'
+      npm_config_ignore_scripts: 'true'
+      npm_config_save_exact: 'true'
+      npm_config_min_release_age: '7'
+      npm_config_update_notifier: 'false'
+    steps:
+      - name: Checkout this exact fork commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Prepare fixed compiler on the disposable cloud runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = arm64
+          mkdir -p "$CARGO_HOME" "$CARGO_TARGET_DIR" "$AGENT_DESKTOP_HOME"
+          chmod 700 "$CARGO_HOME" "$AGENT_DESKTOP_HOME"
+          rustup toolchain install 1.91.0 --profile minimal --no-self-update
+          rustc +1.91.0 --version
+          cargo +1.91.0 --version
+      - name: Download locked source packages without executing build scripts
+        run: cargo +1.91.0 fetch --locked --target aarch64-apple-darwin
+      - name: Verify ages, hashes and reviewed build scripts before compiling
+        run: python3 security/verify_dependencies.py
+      - name: Compile and test offline with outbound network blocked
+        shell: bash
+        run: |
+          set -euo pipefail
+          PROFILE='(version 1)(allow default)(deny network*)'
+          /usr/bin/sandbox-exec -p "$PROFILE" cargo +1.91.0 build --release --locked --offline -p agent-desktop -p agent-desktop-macos --bins
+          /usr/bin/sandbox-exec -p "$PROFILE" cargo +1.91.0 test --locked --offline -p agent-desktop-core -p agent-desktop-macos --lib > dist/library-tests.txt 2>&1
+          /usr/bin/sandbox-exec -p "$PROFILE" "$CARGO_TARGET_DIR/release/agent-desktop" version > dist/version.json
+          /usr/bin/sandbox-exec -p "$PROFILE" "$CARGO_TARGET_DIR/release/agent-desktop" --help > dist/help.txt
+      - name: Package only the locally built CLI and helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p package
+          cp "$CARGO_TARGET_DIR/release/agent-desktop" package/
+          cp "$CARGO_TARGET_DIR/release/agent-desktop-macos-helper" package/
+          codesign --verify --strict package/agent-desktop
+          codesign --verify --strict package/agent-desktop-macos-helper
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          version=json.loads(pathlib.Path('dist/version.json').read_text())
+          assert version['ok'] and version['data']['version']=='1.1.0'
+          p=pathlib.Path('package')
+          manifest={'repository': os.environ['GITHUB_REPOSITORY'], 'commit': os.environ['GITHUB_SHA'], 'run_id': os.environ['GITHUB_RUN_ID'], 'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'upstream_commit': 'd3dc190afbf34cd2377252398ddd5c30efbd093a', 'compiler': subprocess.check_output(['rustc', '+1.91.0', '--version'],text=True).strip(), 'built_from_source': True, 'target': 'aarch64-apple-darwin', 'binaries': {f.name: hashlib.sha256(f.read_bytes()).hexdigest() for f in p.iterdir()}}
+          pathlib.Path('dist/build-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+          PY
+          tar -czf dist/agent-desktop-reviewed-aarch64-apple-darwin.tar.gz -C package agent-desktop agent-desktop-macos-helper
+          (cd dist && shasum -a 256 agent-desktop-reviewed-aarch64-apple-darwin.tar.gz > checksums.txt)
+      - name: Store build outputs and verification evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: reviewed-macos-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7

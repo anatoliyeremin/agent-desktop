@@ -1,0 +1,521 @@
+{
+  "upstream_commit": "d3dc190afbf34cd2377252398ddd5c30efbd093a",
+  "cargo_lock_sha256": "9405a652e6128a42adab4d117208a2883f624c496bbbff0aa54d74b95b2037f6",
+  "build_script_sha256": {
+    "libc 0.2.189": "e47f4a6762799b6e69cefc7acdb3291df828010e4de20609f7378f9c94ea29e6",
+    "proc-macro2 1.0.106": "baeb20b52f6b536be8657a566591a507bb2e34a45cf8baa42b135510a0c3c729",
+    "quote 1.0.45": "cd6808c02e476b09a520105e2c6f6d325cccb1ecd542cbbcc836a0ae6f6fb0f1",
+    "serde 1.0.229": "e2ea6a7a82f5404c3e28cb055883c737ee7903367a10206fbb47b75c009f0eb3",
+    "serde_core 1.0.229": "7bc6b1eec8913ff4cd8e4b9b92cd04a82a4f38beb30a0b73a64c1e6e49f07b5f",
+    "serde_json 1.0.151": "a681e754be844c7dbef957f5d2d00b01f37c5dca160ef1055a8d8f975697a881",
+    "thiserror 2.0.21": "ccc38283604f99237ad2333bbe395259e29fdf2ff4e04a60a95de9e4499c09a3",
+    "zmij 1.0.21": "13201b550236a9ff2186b5303c77341d3b0874989fdaf39613a7452e4ce57817",
+    "project": "317a826a76afd8f59c51c367d41de59bc447a8577f7020dc761f474872aa681b"
+  },
+  "active_crates": [
+    {
+      "name": "accessibility-sys",
+      "version": "0.2.0",
+      "checksum": "46a6a8e90a1d8b96a48249e7c8f5b4058447bea8847280db7bfccb6dcab6b8e1",
+      "published": "2025-03-22T19:38:12Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "anstream",
+      "version": "1.0.0",
+      "checksum": "824a212faf96e9acacdbd09febd34438f8f711fb84e09a8916013cd7815ca28d",
+      "published": "2026-02-11T13:23:11Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "anstyle",
+      "version": "1.0.14",
+      "checksum": "940b3a0ca603d1eade50a4846a2afffd5ef57a9feac2c0e2ec2e14f9ead76000",
+      "published": "2026-03-13T18:59:28Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "anstyle-parse",
+      "version": "1.0.0",
+      "checksum": "52ce7f38b242319f7cabaa6813055467063ecdc9d355bbb4ce0c68908cd8130e",
+      "published": "2026-02-11T13:23:08Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "anstyle-query",
+      "version": "1.1.5",
+      "checksum": "40c48f72fd53cd289104fc64099abca73db4166ad86ea0b4341abe65af83dadc",
+      "published": "2025-11-13T17:30:22Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "base64",
+      "version": "0.23.1",
+      "checksum": "ac07cdecf99051d9a5238b80f35af32cdeba5b336e55d957b318b50137e18da5",
+      "published": "2026-08-04T12:34:31Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "bitflags",
+      "version": "2.11.0",
+      "checksum": "843867be96c8daad0d758b57df9392b6d8d271134fce549de6ce169ff98a92af",
+      "published": "2026-02-14T00:39:21Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "cfg-if",
+      "version": "1.0.4",
+      "checksum": "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801",
+      "published": "2025-10-15T08:12:46Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "clap",
+      "version": "4.6.7",
+      "checksum": "aa8876b300ab35ba921adea3dfd70157a46249b33f95c9084ae5709785478946",
+      "published": "2026-09-14T18:40:28Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "clap_builder",
+      "version": "4.6.7",
+      "checksum": "ec0797fb7aeb1406c84efac526901f7ec3ead2124f946b494e72879d4b54704d",
+      "published": "2026-09-14T18:40:26Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "clap_derive",
+      "version": "4.6.7",
+      "checksum": "f9c751b79415d4e559e3d1fcf128e09e720eb673a06d26cf6f392d37d75b66e0",
+      "published": "2026-09-14T18:40:23Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "clap_lex",
+      "version": "1.0.0",
+      "checksum": "3a822ea5bc7590f9d40f1ba12c0dc3c2760f3482c6984db1573ad11031420831",
+      "published": "2026-02-11T13:20:02Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "colorchoice",
+      "version": "1.0.4",
+      "checksum": "b05b61dc5112cbb17e4b6cd61790d9845d13888356391624cbe7e41efeac1e75",
+      "published": "2025-06-04T18:38:32Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "core-foundation",
+      "version": "0.10.1",
+      "checksum": "b2a6cd9ae233e7f62ba4e9353e81a88df7fc8a5987b8d445b4d90c879bd156f6",
+      "published": "2025-05-26T12:40:41Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "core-foundation-sys",
+      "version": "0.8.7",
+      "checksum": "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b",
+      "published": "2024-08-11T00:48:27Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "core-graphics",
+      "version": "0.25.0",
+      "checksum": "064badf302c3194842cf2c5d61f56cc88e54a759313879cdf03abdd27d0c3b97",
+      "published": "2025-05-27T01:46:19Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "core-graphics-types",
+      "version": "0.2.0",
+      "checksum": "3d44a101f213f6c4cdc1853d4b78aef6db6bdfa3468798cc1d9912f4735013eb",
+      "published": "2024-08-11T11:18:55Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "foreign-types",
+      "version": "0.5.0",
+      "checksum": "d737d9aa519fb7b749cbc3b962edcf310a8dd1f4b67c91c4f83975dbdd17d965",
+      "published": "2019-10-13T19:24:15Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "foreign-types-macros",
+      "version": "0.2.3",
+      "checksum": "1a5c6c585bc94aaf2c7b51dd4c2ba22680844aba4c687be581871a6f518c5742",
+      "published": "2023-03-26T17:42:18Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "foreign-types-shared",
+      "version": "0.3.1",
+      "checksum": "aa9a19cbb55df58761df49b23516a86d432839add4af60fc256da840f66ed35b",
+      "published": "2022-03-21T22:06:37Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "heck",
+      "version": "0.5.0",
+      "checksum": "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea",
+      "published": "2024-03-12T22:42:23Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "is_terminal_polyfill",
+      "version": "1.70.2",
+      "checksum": "a6cb138bb79a146c1bd460005623e142ef0181e3d0219cb493e02f7d08a35695",
+      "published": "2025-10-21T17:00:14Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "itoa",
+      "version": "1.0.17",
+      "checksum": "92ecc6618181def0457392ccd0ee51198e065e016d1d527a7ac1b6dc7c1f09d2",
+      "published": "2025-12-27T06:56:40Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "lazy_static",
+      "version": "1.5.0",
+      "checksum": "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe",
+      "published": "2024-06-21T22:48:42Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "libc",
+      "version": "0.2.189",
+      "checksum": "3eaf3ede3fee6db1a4c2ee091bf8a8b4dccdc6d17f656fb07896ee72867612f2",
+      "published": "2026-07-21T21:33:28Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "log",
+      "version": "0.4.29",
+      "checksum": "5e5032e24019045c762d3c0f28f5b6b8bbf38563a65908389bf7978758920897",
+      "published": "2025-12-02T22:06:36Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "matchers",
+      "version": "0.2.0",
+      "checksum": "d1525a2a28c7f4fa0fc98bb91ae755d1e2d1505079e05539e35bc876b5d65ae9",
+      "published": "2024-07-01T22:20:07Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "memchr",
+      "version": "2.8.0",
+      "checksum": "f8ca58f447f06ed17d5fc4043ce1b10dd205e060fb3ce5b979b8ed8e59ff3f79",
+      "published": "2026-02-06T19:39:00Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "nu-ansi-term",
+      "version": "0.50.3",
+      "checksum": "7957b9740744892f114936ab4a57b3f487491bbeafaf8083688b16841a4240e5",
+      "published": "2025-10-10T17:34:18Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "once_cell",
+      "version": "1.21.3",
+      "checksum": "42f5e15c9953c5e4ccceeb2e7382a716482c34515315f7b03532b8b4e8393d2d",
+      "published": "2025-03-28T17:15:56Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "pin-project-lite",
+      "version": "0.2.16",
+      "checksum": "3b3cff922bd51709b605d9ead9aa71031d81447142d828eb4a6eba76fe619f9b",
+      "published": "2025-01-06T12:20:51Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "proc-macro2",
+      "version": "1.0.106",
+      "checksum": "8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934",
+      "published": "2026-01-21T22:08:20Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "quote",
+      "version": "1.0.45",
+      "checksum": "41f2619966050689382d2b44f664f4bc593e129785a36d6ee376ddf37259b924",
+      "published": "2026-03-03T20:54:15Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "regex-automata",
+      "version": "0.4.14",
+      "checksum": "6e1dd4122fc1595e8162618945476892eefca7b88c52820e74af6262213cae8f",
+      "published": "2026-02-03T13:48:23Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "regex-syntax",
+      "version": "0.8.9",
+      "checksum": "a96887878f22d7bad8a3b6dc5b7440e0ada9a245242924394987b21cf2210a4c",
+      "published": "2026-02-03T13:48:04Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "rustc-hash",
+      "version": "2.1.3",
+      "checksum": "6b1e7f9a428571be2dc5bc0505c13fb6bf936822b894ec87abf8a08a4e51742d",
+      "published": "2026-07-02T19:13:03Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "serde",
+      "version": "1.0.229",
+      "checksum": "4148590afebada386688f18773da617792bf2ef03ffc1e4cbd2b1d45b023e0ba",
+      "published": "2026-07-18T23:05:13Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "serde_core",
+      "version": "1.0.229",
+      "checksum": "67dca2c9c51e58a4791a4b1ed58308b39c64224d349a935ab5039aa360942a48",
+      "published": "2026-07-18T23:05:10Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "serde_derive",
+      "version": "1.0.229",
+      "checksum": "e7a5d71263a5a7d47b41f6b3f06ba276f10cc18b0931f1799f710578e2309348",
+      "published": "2026-07-18T23:05:07Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "serde_json",
+      "version": "1.0.151",
+      "checksum": "c841b55ecdae098c80dcae9cf767f6f8a0c2cdb3416bbef72181df4d0fe73f14",
+      "published": "2026-07-20T05:54:44Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "sharded-slab",
+      "version": "0.1.7",
+      "checksum": "f40ca3c46823713e0d4209592e8d6e826aa57e928f09752619fc696c499637f6",
+      "published": "2023-10-04T19:37:55Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "smallvec",
+      "version": "1.16.2",
+      "checksum": "f9395f0f0eee849a9b707b2f06bb92a6a422090e2123bb2ef8e87a0e61892a8e",
+      "published": "2026-09-25T05:54:44Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "strsim",
+      "version": "0.11.1",
+      "checksum": "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f",
+      "published": "2024-04-02T22:18:09Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "syn",
+      "version": "2.0.117",
+      "checksum": "e665b8803e7b1d2a727f4023456bbbbe74da67099c585258af0ad9c5013b9b99",
+      "published": "2026-02-20T02:40:03Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "syn",
+      "version": "3.0.3",
+      "checksum": "53e9bae58849f64dfa4f5d5ae372c8341f7305f82a3868709269343628b659a3",
+      "published": "2026-07-22T00:35:52Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "thiserror",
+      "version": "2.0.21",
+      "checksum": "09e52cb86a36cede5cb101bf8908837b3e4c6e5e59fe7fd85c23fb56200d189e",
+      "published": "2026-09-23T20:24:07Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "thiserror-impl",
+      "version": "2.0.21",
+      "checksum": "fe5197923287db20a58125f0bc85c062f7f2c892de97b18c356f9efb14b28524",
+      "published": "2026-09-23T20:24:05Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "thread_local",
+      "version": "1.1.9",
+      "checksum": "f60246a4944f24f6e018aa17cdeffb7818b76356965d03b07d6a9886e8962185",
+      "published": "2025-06-12T23:46:41Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "tracing",
+      "version": "0.1.44",
+      "checksum": "63e71662fa4b2a2c3a26f570f037eb95bb1f85397f3cd8076caed2f026a6d100",
+      "published": "2025-12-18T14:26:12Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "tracing-attributes",
+      "version": "0.1.31",
+      "checksum": "7490cfa5ec963746568740651ac6781f701c9c5ea257c58e057f3ba8cf69e8da",
+      "published": "2025-11-26T11:23:01Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "tracing-core",
+      "version": "0.1.36",
+      "checksum": "db97caf9d906fbde555dd62fa95ddba9eecfd14cb388e4f491a66d74cd5fb79a",
+      "published": "2025-12-18T14:13:04Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "tracing-log",
+      "version": "0.2.0",
+      "checksum": "ee855f1f400bd0e5c02d150ae5de3840039a3f54b025156404e34c23c03f47c3",
+      "published": "2023-10-25T17:01:37Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "tracing-subscriber",
+      "version": "0.3.23",
+      "checksum": "cb7f578e5945fb242538965c2d0b04418d38ec25c79d160cd279bf0731c8d319",
+      "published": "2026-03-13T10:04:15Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "unicode-ident",
+      "version": "1.0.24",
+      "checksum": "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75",
+      "published": "2026-02-16T02:46:44Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "utf8parse",
+      "version": "0.2.2",
+      "checksum": "06abde3611657adf66d383f00b093d7faecc7fa57071cce2578660c9f1010821",
+      "published": "2024-06-08T07:07:41Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    },
+    {
+      "name": "zmij",
+      "version": "1.0.21",
+      "checksum": "b8848ee67ecc8aedbaf3e4122217aff892639231befc6a1b58d29fff4c2cabaa",
+      "published": "2026-02-12T03:14:15Z",
+      "older_than_seven_days": true,
+      "yanked": false,
+      "checksum_matches": true
+    }
+  ]
+}
